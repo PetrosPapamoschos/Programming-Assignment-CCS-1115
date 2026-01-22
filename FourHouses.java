@@ -9,41 +9,16 @@ public class FourHouses{
         int house3[] = new int[31]; 
         int house4[] = new int[31];
 
-        int randomNumber = randomNumberGenerator(1, 15);
-        Scanner scan = new Scanner(System.in);
+        int randomNumber =  32;//randomNumberGenerator(1, 15);
+      
         int choice = 0;
         int playerWhiteScore = 0;
         int playerBlackScore = 0;
 
     do{
         displayMenu(house1, house2, house3, house4, randomNumber);
-        choice = scan.nextInt();
-        while(choice <= 1 || choice >= 4){
-            System.out.println("Your choice should be from 1 to 4. Please enter again:");
-            choice = scan.nextInt();
-        }       
-        switch(choice){
-            case 1: 
-            {
-                addtoHouse(house1, randomNumber);
-                break;
-            }
-            case 2: 
-            {
-                addtoHouse(house2, randomNumber);
-                break;
-            }
-            case 3: 
-            {
-                addtoHouse(house3, randomNumber);
-                break;
-            }
-            case 4: 
-            {
-                addtoHouse(house4, randomNumber);
-                break;
-            }
-        }
+        choiceStage(house1, house2, house3, house4, randomNumber, choice); 
+        
 
 
     }while(allHousesClosed(house1, house2, house3, house4));
@@ -139,5 +114,81 @@ public class FourHouses{
             Arrays.fill(house, 0);
         }
 
+        public static void choiceStage(int house1[],int  house2[],int house3[],int  house4[], int randomNumber, int choice){
+              Scanner scan = new Scanner(System.in);
+            choice = scan.nextInt();
+        while(choice < 1 || choice > 4){
+            System.out.println("Your choice should be from 1 to 4. Please enter again:");
+            choice = scan.nextInt();
+        }     
+            switch(choice){
+            case 1: 
+            {
+                if(isHouseClosed(house1)){
+                    System.out.println("House 1 is closed. Please choose another house:");
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                }
+                addtoHouse(house1, randomNumber);
+                // if(houseEquals31(house1)){
+                //     playerScore += 50;
+                // }else 
+                if(isHouseClosed(house1)){
+                    System.out.println("House 1 closed.");
+                }
+                break;
+            }
+            
+            
+            case 2: 
+            {
+                if(isHouseClosed(house2)){
+                    System.out.println("House 2 is closed. Please choose another house:");
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                }
+                addtoHouse(house2, randomNumber);
+                // if(houseEquals31(house2)){
+                //     playerScore += 50;
+                // }else
+                 if(isHouseClosed(house2)){
+                    System.out.println("House 2 closed.");
+                }
+                break;
+            }
+            case 3: 
+            {
+                if(isHouseClosed(house3)){
+                    System.out.println("House 3 is closed. Please choose another house:");
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                }
+                addtoHouse(house3, randomNumber);
+                // if(houseEquals31(house3)){
+                //     playerScore += 50;
+                // }else 
+                if(isHouseClosed(house3)){
+                    System.out.println("House 3 closed.");
+                }
+                break;
+            }
+            case 4: 
+            {
+               if(isHouseClosed(house4)){
+                    System.out.println("House 4 is closed. Please choose another house:");
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                }
+                addtoHouse(house4, randomNumber);
+                // if(houseEquals31(house4)){
+                //     playerScore += 50;
+                // }else
+                if(isHouseClosed(house4)){
+                    System.out.println("House 4 closed.");
+                }
+                break;
+            }
+        }
+
     }
+
+}
+
+
 
