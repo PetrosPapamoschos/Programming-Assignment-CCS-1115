@@ -8,14 +8,42 @@ public class FourHouses{
         int house2[] = new int[31]; 
         int house3[] = new int[31]; 
         int house4[] = new int[31];
+
+        int randomNumber = randomNumberGenerator(1, 15);
         Scanner scan = new Scanner(System.in);
+        int choice = 0;
     do{
-
-
+        switch(choice){
+            case 1: 
+            {
+                addtoHouse(house1, randomNumber);
+                break;
+            }
+            case 2: 
+            {
+                addtoHouse(house2, randomNumber);
+                break;
+            }
+            case 3: 
+            {
+                addtoHouse(house3, randomNumber);
+                break;
+            }
+            case 4: 
+            {
+                addtoHouse(house4, randomNumber);
+                break;
+            }
+        }
 
 
     }while(allHousesClosed(house1, house2, house3, house4));
 
+    }
+        public static int randomNumberGenerator(int min, int max) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(max - min + 1) + min;
+        return randomNumber;
     }
 
     public static boolean allHousesClosed(int house1[], int house2[], int house3[], int house4[]){
@@ -69,5 +97,3 @@ public class FourHouses{
         }
 
     }
-
-
