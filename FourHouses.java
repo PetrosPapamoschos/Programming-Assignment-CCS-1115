@@ -12,8 +12,16 @@ public class FourHouses{
         int randomNumber = randomNumberGenerator(1, 15);
         Scanner scan = new Scanner(System.in);
         int choice = 0;
+        int playerWhiteScore = 0;
+        int playerBlackScore = 0;
+
     do{
-        displayMenu(house1, house2, house3, house4, randomNumber);        
+        displayMenu(house1, house2, house3, house4, randomNumber);
+        choice = scan.nextInt();
+        while(choice <= 1 || choice >= 4){
+            System.out.println("Your choice should be from 1 to 4. Please enter again:");
+            choice = scan.nextInt();
+        }       
         switch(choice){
             case 1: 
             {
@@ -98,27 +106,38 @@ public class FourHouses{
         }
 
         public static void displayMenu(int[] house1, int[] house2, int[] house3, int[] house4, int randomNumber){
-        System.out.print("Houses:\n"+"House1 (sum:"+sumOfHouse(house1)+") ");
-        for(int i=0; i<nextEmptyIndex(house1); i++) {
-            System.out.print(house1[i]+" ");
+            System.out.print("Houses:\n"+"House1 (sum:"+sumOfHouse(house1)+") ");
+            for(int i=0; i<nextEmptyIndex(house1); i++) {
+                System.out.print(house1[i]+" ");
+            }
+            System.out.println();
+            System.out.print("House2 (sum"+sumOfHouse(house2)+") ");
+            for(int i=0; i<nextEmptyIndex(house2); i++) {
+                System.out.print(house2[i]+" ");
+            }
+            System.out.println();
+            System.out.print("House3 (sum"+sumOfHouse(house3)+") ");
+            for(int i=0; i<nextEmptyIndex(house3); i++) {
+                System.out.print(house3[i]+" ");
+            }
+            System.out.println();
+            System.out.print("House4 (sum"+sumOfHouse(house4)+") ");
+            for(int i=0; i<nextEmptyIndex(house4); i++) {
+                System.out.print(house4[i]+" ");
+            }
+            System.out.println();
+            System.out.println("Random number drawn: "+randomNumber+ "\nTo which house do you want to add the number?");
         }
-        System.out.println();
-        System.out.print("House2 (sum"+sumOfHouse(house2)+") ");
-        for(int i=0; i<nextEmptyIndex(house2); i++) {
-            System.out.print(house2[i]+" ");
+        public static void houseEquals31(int house[]){
+            if(sumOfHouse(house) == 31){
+                //playerScore += 50;
+                resetHouse(house);
+            }
         }
-        System.out.println();
-        System.out.print("House3 (sum"+sumOfHouse(house3)+") ");
-        for(int i=0; i<nextEmptyIndex(house3); i++) {
-            System.out.print(house3[i]+" ");
-        }
-        System.out.println();
-        System.out.print("House4 (sum"+sumOfHouse(house4)+") ");
-        for(int i=0; i<nextEmptyIndex(house4); i++) {
-            System.out.print(house4[i]+" ");
-        }
-        System.out.println();
-        System.out.println("Random number drawn: "+randomNumber+ "\nTo which house do you want to add the number?");
+
+        public static void resetHouse(int house[]){
+            Arrays.fill(house, 0);
         }
 
     }
+
