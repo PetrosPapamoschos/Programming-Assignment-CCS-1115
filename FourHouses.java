@@ -23,6 +23,8 @@ public class FourHouses{
 
     }while(allHousesClosed(house1, house2, house3, house4));
 
+    System.out.println("Game over!");
+
     }
         public static int randomNumberGenerator(int min, int max) {
         Random random = new Random();
@@ -127,6 +129,7 @@ public class FourHouses{
                 if(isHouseClosed(house1)){
                     System.out.println("House 1 is closed. Please choose another house:");
                     choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                    return;
                 }
                 addtoHouse(house1, randomNumber);
                 // if(houseEquals31(house1)){
@@ -144,6 +147,7 @@ public class FourHouses{
                 if(isHouseClosed(house2)){
                     System.out.println("House 2 is closed. Please choose another house:");
                     choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                    return;
                 }
                 addtoHouse(house2, randomNumber);
                 // if(houseEquals31(house2)){
@@ -159,6 +163,7 @@ public class FourHouses{
                 if(isHouseClosed(house3)){
                     System.out.println("House 3 is closed. Please choose another house:");
                     choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                    return;
                 }
                 addtoHouse(house3, randomNumber);
                 // if(houseEquals31(house3)){
@@ -174,6 +179,7 @@ public class FourHouses{
                if(isHouseClosed(house4)){
                     System.out.println("House 4 is closed. Please choose another house:");
                     choiceStage(house1, house2, house3, house4, randomNumber, choice);
+                    return;
                 }
                 addtoHouse(house4, randomNumber);
                 // if(houseEquals31(house4)){
