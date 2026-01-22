@@ -66,16 +66,6 @@ public class FourHouses{
             return -1;
         }
 
-
-
-
-    public static int sumOfHouse(int[] house){
-        int sum = 0;
-        for(int i = 0; i < house.length; i++){
-            sum += house[i];
-        }
-        return sum;
-    }
     public static int[] selectHouse(int choice){
         int choice = 0;
         switch(choice){
