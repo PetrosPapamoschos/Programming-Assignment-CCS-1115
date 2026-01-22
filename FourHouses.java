@@ -12,6 +12,9 @@ public class FourHouses{
         int randomNumber = randomNumberGenerator(1, 15);
         Scanner scan = new Scanner(System.in);
         int choice = 0;
+        int playerWhiteScore = 0;
+        int playerBlackScore = 0;
+
     do{
         switch(choice){
             case 1: 
@@ -94,6 +97,17 @@ public class FourHouses{
                 }
             }
             return -1;
+        }
+
+        public static void houseEquals31(int house[]){
+            if(sumOfHouse(house) == 31){
+                //playerScore += 50;
+                resetHouse(house);
+            }
+        }
+
+        public static void resetHouse(int house[]){
+            Arrays.fill(house, 0);
         }
 
     }
