@@ -14,5 +14,17 @@ public class FourHouses{
         }
         return sum;
     }
+    public static int[] selectHouse(int choice){
+        int choice = 0;
+        switch(choice){
+            case 1: return house1[];
+            case 2: return house2[];
+            case 3: return house3[];    
+            case 4: return house4[];
+                            
+        }
+        }
+
+    }
 
 }
