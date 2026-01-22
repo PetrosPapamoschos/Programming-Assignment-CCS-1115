@@ -8,26 +8,38 @@ public class FourHouses{
         int house2[] = new int[31]; 
         int house3[] = new int[31]; 
         int house4[] = new int[31];
-
-
-      
+        int roundNumber = -1;
         int choice = 0;
         int playerWhiteScore = 0;
         int playerBlackScore = 0;
+        do{
+            roundNumber++;
+            int randomNumber = randomNumberGenerator(1, 15);
+            if(roundNumber % 2 == 0){
+                System.out.println("WHITE Plays (" + playerWhiteScore + " points)");
+                displayMenu(house1, house2, house3, house4, randomNumber);
+                playerWhiteScore = choiceStage(house1, house2, house3, house4, randomNumber, choice, playerWhiteScore); 
+            }else{
+                System.out.println("BLACK Plays (" + playerBlackScore + " points)");
+                displayMenu(house1, house2, house3, house4, randomNumber);
+                playerBlackScore = choiceStage(house1, house2, house3, house4, randomNumber, choice, playerBlackScore); 
+            }
+        }while(allHousesClosed(house1, house2, house3, house4));
 
-    do{
-        int randomNumber = randomNumberGenerator(1, 15);
-       // System.out.println(randomNumber);
-        displayMenu(house1, house2, house3, house4, randomNumber);
-        choiceStage(house1, house2, house3, house4, randomNumber, choice); 
-        
+        System.out.println("Game Over!");
 
-
-    }while(allHousesClosed(house1, house2, house3, house4));
-
-    System.out.println("Game over!");
-
+        if (playerWhiteScore > playerBlackScore){
+            System.out.println("WHITE wins with "+playerWhiteScore+" points!"); 
+        }else if (playerBlackScore > playerWhiteScore){
+            System.out.println("BLACK wins with "+playerBlackScore+" points!"); 
+        }else if(playerBlackScore == playerWhiteScore){
+            System.out.println("It's a tie! Both players have "+playerBlackScore+" points!");
+        }
     }
+
+
+
+
         public static int randomNumberGenerator(int min, int max) {
         Random random = new Random();
         int randomNumber = random.nextInt(max - min + 1) + min;
@@ -124,18 +136,19 @@ public class FourHouses{
             }
             System.out.println("Random number drawn: "+randomNumber+ "\nTo which house do you want to add the number?");
         }
-        public static void houseEquals31(int house[]){
+        public static boolean houseEquals31(int house[]){
             if(sumOfHouse(house) == 31){
-                //playerScore += 50;
                 resetHouse(house);
+                return true;
             }
+            return false;
         }
 
         public static void resetHouse(int house[]){
             Arrays.fill(house, 0);
         }
 
-        public static void choiceStage(int house1[],int  house2[],int house3[],int  house4[], int randomNumber, int choice){
+        public static int choiceStage(int house1[],int  house2[],int house3[],int  house4[], int randomNumber, int choice, int playerScore){
               Scanner scan = new Scanner(System.in);
             choice = scan.nextInt();
         while(choice < 1 || choice > 4){
@@ -147,14 +160,15 @@ public class FourHouses{
             {
                 if(isHouseClosed(house1)){
                     System.out.println("House 1 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
-                    return;
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
+                    return playerScore;
                 }
                 addtoHouse(house1, randomNumber);
-                // if(houseEquals31(house1)){
-                //     playerScore += 50;
-                // }else 
-                if(isHouseClosed(house1)){
+                if(houseEquals31(house1)){
+                    playerScore += 50;
+                    System.out.println("You scored 50 points!");
+                    return playerScore;
+                }else if(isHouseClosed(house1)){
                     System.out.println("House 1 closed.");
                 }
                 break;
@@ -165,14 +179,15 @@ public class FourHouses{
             {
                 if(isHouseClosed(house2)){
                     System.out.println("House 2 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
-                    return;
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
+                    return playerScore;
                 }
                 addtoHouse(house2, randomNumber);
-                // if(houseEquals31(house2)){
-                //     playerScore += 50;
-                // }else
-                 if(isHouseClosed(house2)){
+                if(houseEquals31(house2)){
+                    playerScore += 50;
+                    System.out.println("You scored 50 points!");
+                    return playerScore;
+                }else if(isHouseClosed(house2)){
                     System.out.println("House 2 closed.");
                 }
                 break;
@@ -181,14 +196,15 @@ public class FourHouses{
             {
                 if(isHouseClosed(house3)){
                     System.out.println("House 3 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
-                    return;
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
+                    return playerScore;
                 }
                 addtoHouse(house3, randomNumber);
-                // if(houseEquals31(house3)){
-                //     playerScore += 50;
-                // }else 
-                if(isHouseClosed(house3)){
+                if(houseEquals31(house3)){
+                    playerScore += 50;
+                    System.out.println("You scored 50 points!");
+                    return playerScore;
+                }else if(isHouseClosed(house3)){
                     System.out.println("House 3 closed.");
                 }
                 break;
@@ -197,19 +213,21 @@ public class FourHouses{
             {
                if(isHouseClosed(house4)){
                     System.out.println("House 4 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice);
-                    return;
+                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
+                    return playerScore;
                 }
                 addtoHouse(house4, randomNumber);
-                // if(houseEquals31(house4)){
-                //     playerScore += 50;
-                // }else
-                if(isHouseClosed(house4)){
+                if(houseEquals31(house4)){
+                    playerScore += 50;
+                    System.out.println("You scored 50 points!");
+                    return playerScore;
+                }else if(isHouseClosed(house4)){
                     System.out.println("House 4 closed.");
                 }
                 break;
             }
         }
+            return playerScore;
 
     }
 
