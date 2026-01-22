@@ -17,16 +17,16 @@ public class FourHouses{
 
     public static boolean allHousesClosed(int house1[], int house2[], int house3[], int house4[]){
         int count = 0;
-        if (sumOfHouse(house1) == 31){
+        if (isHouseClosed(house1)){
             count++;
         }
-        if (sumOfHouse(house2) == 31){
+        if (isHouseClosed(house2)){
             count++;
         }
-        if (sumOfHouse(house3) == 31){
+        if (isHouseClosed(house3)){
             count++;
         }
-        if (sumOfHouse(house4) == 31){
+        if (isHouseClosed(house4)){
             count++;
         }
         if (count == 4){
@@ -34,6 +34,22 @@ public class FourHouses{
         }else{
             return true;
         }
+    }
+
+    public static boolean isHouseClosed(int house[]){
+        if (sumOfHouse(house) >= 31){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+        public static int sumOfHouse(int house[]){
+            int sum = 0;
+            for (int i = 0; i < house.length; i++){
+                sum += house[i];
+            }
+            return sum;
     }
 
         public static void addtoHouse(int house[], int numberToAdd){
