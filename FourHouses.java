@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class FourHouses{
     public static void main(String[] args) {
@@ -7,6 +8,7 @@ public class FourHouses{
         int house2[] = new int[31]; 
         int house3[] = new int[31]; 
         int house4[] = new int[31];
+        Scanner scan = new Scanner(System.in);
     do{
 
 
@@ -38,7 +40,7 @@ public class FourHouses{
     }
 
     public static boolean isHouseClosed(int house[]){
-        if (sumOfHouse(house) >= 31){
+        if (sumOfHouse(house) > 31){
             return true;
         }else{
             return false;
@@ -64,17 +66,6 @@ public class FourHouses{
                 }
             }
             return -1;
-        }
-
-    public static int[] selectHouse(int choice){
-        int choice = 0;
-        switch(choice){
-            case 1: return house1[];
-            case 2: return house2[];
-            case 3: return house3[];    
-            case 4: return house4[];
-                            
-        }
         }
 
     }
