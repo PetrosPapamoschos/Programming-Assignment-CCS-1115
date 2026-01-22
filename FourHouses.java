@@ -12,10 +12,10 @@ public class FourHouses{
     do{
         switch(choice){
             case 1: 
-            [
+            {
                 addtoHouse(house1, randomNumber);
                 break;
-            ]
+            }
             case 2: 
             {
                 addtoHouse(house2, randomNumber);
