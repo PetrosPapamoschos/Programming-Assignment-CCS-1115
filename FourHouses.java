@@ -7,13 +7,40 @@ public class FourHouses{
         int house2[] = new int[31]; 
         int house3[] = new int[31]; 
         int house4[] = new int[31];
+
+        int randomNumber = randomNumberGenerator(1, 15);
     do{
-
-
+        switch(choice){
+            case 1: 
+            [
+                addtoHouse(house1, randomNumber);
+                break;
+            ]
+            case 2: 
+            {
+                addtoHouse(house2, randomNumber);
+                break;
+            }
+            case 3: 
+            {
+                addtoHouse(house3, randomNumber);
+                break;
+            }
+            case 4: 
+            {
+                addtoHouse(house4, randomNumber);
+                break;
+            }
+        }
 
 
     }while(allHousesClosed(house1, house2, house3, house4));
 
+    }
+        public static int randomNumberGenerator(int min, int max) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(max - min + 1) + min;
+        return randomNumber;
     }
 
     public static boolean allHousesClosed(int house1[], int house2[], int house3[], int house4[]){
@@ -37,10 +64,6 @@ public class FourHouses{
         }
     }
 
-        public static void addtoHouse(int house[], int numberToAdd){
-           house[nextEmptyIndex(house)] = numberToAdd;
-        }
-
         public static int nextEmptyIndex(int house[]){
             for (int i = 0; i < house.length; i++){
                 if (house[i] == 0){
@@ -50,9 +73,6 @@ public class FourHouses{
             return -1;
         }
 
-
-
-
     public static int sumOfHouse(int[] house){
         int sum = 0;
         for(int i = 0; i < house.length; i++){
@@ -60,17 +80,8 @@ public class FourHouses{
         }
         return sum;
     }
-    public static int[] selectHouse(int choice){
-        int choice = 0;
-        switch(choice){
-            case 1: return house1[];
-            case 2: return house2[];
-            case 3: return house3[];    
-            case 4: return house4[];
-                            
+    
+        public static void addtoHouse(int house[], int numberToAdd){
+           house[nextEmptyIndex(house)] = numberToAdd;
         }
-        }
-
     }
-
-
