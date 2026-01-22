@@ -13,6 +13,7 @@ public class FourHouses{
         Scanner scan = new Scanner(System.in);
         int choice = 0;
     do{
+        displayMenu(house1, house2, house3, house4, randomNumber);        
         switch(choice){
             case 1: 
             {
@@ -94,6 +95,30 @@ public class FourHouses{
                 }
             }
             return -1;
+        }
+
+        public static void displayMenu(int[] house1, int[] house2, int[] house3, int[] house4, int randomNumber){
+        System.out.print("Houses:\n"+"House1 (sum:"+sumOfHouse(house1)+") ");
+        for(int i=0; i<nextEmptyIndex(house1); i++) {
+            System.out.print(house1[i]+" ");
+        }
+        System.out.println();
+        System.out.print("House2 (sum"+sumOfHouse(house2)+") ");
+        for(int i=0; i<nextEmptyIndex(house2); i++) {
+            System.out.print(house2[i]+" ");
+        }
+        System.out.println();
+        System.out.print("House3 (sum"+sumOfHouse(house3)+") ");
+        for(int i=0; i<nextEmptyIndex(house3); i++) {
+            System.out.print(house3[i]+" ");
+        }
+        System.out.println();
+        System.out.print("House4 (sum"+sumOfHouse(house4)+") ");
+        for(int i=0; i<nextEmptyIndex(house4); i++) {
+            System.out.print(house4[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Random number drawn: "+randomNumber+ "\nTo which house do you want to add the number?");
         }
 
     }
