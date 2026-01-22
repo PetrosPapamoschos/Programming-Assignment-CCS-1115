@@ -100,7 +100,7 @@ public class FourHouses{
             if(isHouseClosed(house1)){
                 System.out.println("Houses: \n"+"House 1: Closed!");
             }else{
-            System.out.print("Houses:\n"+"House1 (sum:"+sumOfHouse(house1)+") ");
+            System.out.print("Houses:\n"+"House1 (sum: "+sumOfHouse(house1)+") ");
             for(int i=0; i<nextEmptyIndex(house1); i++) {
                 System.out.print(house1[i]+" ");
             }
