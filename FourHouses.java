@@ -51,7 +51,7 @@ public class FourHouses{
 
     //Method to check if a singular house is closed
     public static boolean isHouseClosed(int house[]){
-       return (sumOfHouse(house) > 31 || nextEmptyIndex(house) == -1);
+       return (sumOfHouse(house) > 31 || nextEmptyIndex(house) == -1); //if house array is full, the error will be anoided.
     }
 
     //Method to calculate the sum of numbers in a house
@@ -160,7 +160,7 @@ public class FourHouses{
         if(isHouseClosed(houseOfChoice)){
             System.out.println("House " + choice + " is closed. Please choose another house:");
             return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
-        }else if(canCloseHouse(houseOfChoice, randomNumber, house1, house2, house3, house4)){
+        }else if(cannotCloseHouse(houseOfChoice, randomNumber, house1, house2, house3, house4)){
             System.out.println("Invalid move, other move(s) are availabe without closing a house.");
             return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
         }
@@ -174,7 +174,21 @@ public class FourHouses{
         return playerScore; // return same score if no points were scored
     }
 
-    public static boolean canCloseHouse(int houseOfChoice[], int randomNumber, int house1[], int house2[], int house3[], int house4[]){
-       
+    public static boolean cannotCloseHouse(int houseOfChoice[], int randomNumber, int house1[], int house2[], int house3[], int house4[]){
+        if (houseGoesOver31(houseOfChoice, randomNumber)){
+            if(!houseGoesOver31(house1, randomNumber) && house1 != houseOfChoice){
+                return true;
+            }
+            if(!houseGoesOver31(house2, randomNumber) && house2 != houseOfChoice){
+                return true;
+            }
+            if (!houseGoesOver31(house3, randomNumber) && house3 != houseOfChoice) {
+                return true;                
+            }
+            if (!houseGoesOver31(house4, randomNumber) && house4 != houseOfChoice) {
+                return true;                
+            }
+        }
+        return false;
     }
 }
