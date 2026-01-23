@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class FourHouses{
 
     private static final Scanner scan = new Scanner(System.in);
-    
+
     public static void main(String[] args) {
         // Initialize houses with size 31 to hold house numbers because the odds to exceed 31 are 1 in 19.175,105.923.288.408.666.849.136.352.539.062.5(so basically impossible)
         int house1[] = new int[31];
@@ -84,7 +84,7 @@ public class FourHouses{
     public static void addtoHouse(int house[], int numberToAdd){
         int nextIndex = nextEmptyIndex(house);
         if (nextIndex != -1){ //Validatefor the unlikely event that the house is full
-           house[nextEmptyIndex(house)] = numberToAdd;
+           house[nextIndex] = numberToAdd;
         }
     }
 
@@ -92,7 +92,7 @@ public class FourHouses{
     public static int nextEmptyIndex(int house[]){
             for (int i = 0; i < house.length; i++){
                 if (house[i] == 0){
-                    return i;
+                    return i; // Return the first empty index
                 }
             }
             return -1; // Return -1 if house is full(which is immpossible in this game as mentioned before)
