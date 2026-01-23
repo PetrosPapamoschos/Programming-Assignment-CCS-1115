@@ -97,45 +97,27 @@ public class FourHouses{
         }
 
         public static void displayMenu(int[] house1, int[] house2, int[] house3, int[] house4, int randomNumber){
-            if(isHouseClosed(house1)){
-                System.out.println("Houses: \n"+"House 1: Closed!");
-            }else{
-            System.out.print("Houses:\n"+"House1 (sum: "+sumOfHouse(house1)+") ");
-            for(int i=0; i<nextEmptyIndex(house1); i++) {
-                System.out.print(house1[i]+" ");
-            }
-            System.out.println();
-            }
-            if(isHouseClosed(house2)){
-                System.out.println("House 2: Closed!");
-            }else{
-            System.out.print("House2 (sum: "+sumOfHouse(house2)+") ");
-            for(int i=0; i<nextEmptyIndex(house2); i++) {
-                System.out.print(house2[i]+" ");
-            }
-            System.out.println();
-            }
-
-            if(isHouseClosed(house3)){
-                System.out.println("House 3: Closed!");
-            }else{
-                System.out.print("House3 (sum: "+sumOfHouse(house3)+") ");
-                for(int i=0; i<nextEmptyIndex(house3); i++) {
-                System.out.print(house3[i]+" ");
-            }
-            System.out.println();
-            }
-            if(isHouseClosed(house4)){
-                System.out.println("House 4: Closed!");
-            }else{
-            System.out.print("House4 (sum: "+sumOfHouse(house4)+") ");
-            for(int i=0; i<nextEmptyIndex(house4); i++) {
-                System.out.print(house4[i]+" ");
-            }
-            System.out.println();
-            }
+            System.out.println("Houses:");
+            displayHouse(house1, 1);
+            displayHouse(house2, 2);
+            displayHouse(house3, 3);
+            displayHouse(house4, 4);
             System.out.println("Random number drawn: "+randomNumber+ "\nTo which house do you want to add the number?");
+
         }
+
+        public static void displayHouse(int house[], int houseNumber){
+            if(isHouseClosed(house)){
+                System.out.println("House " + houseNumber + ": Closed!");
+            }else{
+                System.out.print("House " + houseNumber + " (sum: "+sumOfHouse(house)+") ");
+                for(int i=0; i<nextEmptyIndex(house); i++) {
+                    System.out.print(house[i]+" ");
+                }
+            System.out.println();
+            }
+        }
+
         public static boolean houseEquals31(int house[]){
             if(sumOfHouse(house) == 31){
                 resetHouse(house);
@@ -160,8 +142,7 @@ public class FourHouses{
             {
                 if(isHouseClosed(house1)){
                     System.out.println("House 1 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
-                    return playerScore;
+                    return choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
                 }
                 addtoHouse(house1, randomNumber);
                 if(houseEquals31(house1)){
@@ -173,14 +154,11 @@ public class FourHouses{
                 }
                 break;
             }
-            
-            
             case 2: 
             {
                 if(isHouseClosed(house2)){
                     System.out.println("House 2 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
-                    return playerScore;
+                    return choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
                 }
                 addtoHouse(house2, randomNumber);
                 if(houseEquals31(house2)){
@@ -196,8 +174,7 @@ public class FourHouses{
             {
                 if(isHouseClosed(house3)){
                     System.out.println("House 3 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
-                    return playerScore;
+                    return choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
                 }
                 addtoHouse(house3, randomNumber);
                 if(houseEquals31(house3)){
@@ -213,8 +190,7 @@ public class FourHouses{
             {
                if(isHouseClosed(house4)){
                     System.out.println("House 4 is closed. Please choose another house:");
-                    choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
-                    return playerScore;
+                    return choiceStage(house1, house2, house3, house4, randomNumber, choice, playerScore);
                 }
                 addtoHouse(house4, randomNumber);
                 if(houseEquals31(house4)){
@@ -228,7 +204,6 @@ public class FourHouses{
             }
         }
             return playerScore;
-
     }
 
 }
