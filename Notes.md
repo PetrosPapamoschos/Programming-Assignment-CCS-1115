@@ -38,5 +38,28 @@ Program is run:
 
 * **Game runs until all Homes is closed.** After it Prints ScoreWhite and ScoreBlack. The player with the most score wins!
 
+# Notes for 2d array:
+
+1 create  one int houses[][] = new int[4][31];
+
+2 diplay for both players should only send houses (not 1,2,3,4)
+
+3 allHousesClosed should only send houses (not 1,2,3,4)
+
+4 all housesClosed should do a for to check for all arrays 
+
+5 displayMenu should do a for to call displayHouse(houses[i], i + 1)  and hous1,house2,h... should be replaced with the 2d array houses
+
+6 in choiceStage when processHouseChoice is called swap getHouseByChoice() with houses[choice - 1]
+
+7 DELETe get house by choice
+
+8 processHouseChoice house1,2,3,4 in the parameters should be replaced with int houses[][] and return it to choices if illegal move
+
+9 in cannotCloseHouse replace the four if statements with a for loop
+
+
+
+
 
 
