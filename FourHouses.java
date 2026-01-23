@@ -5,34 +5,40 @@ import java.util.Scanner;
 public class FourHouses{
 
     private static final Scanner scan = new Scanner(System.in);
+    private static final int HOUSE_COUNT = 50; // Set the number of houses for the game
 
     public static void main(String[] args) {
         // Initialize houses with size 31 to hold house numbers because the odds to exceed 31 are 1 in 19.175,105.923.288.408.666.849.136.352.539.062.5(so basically impossible)
-        int houses[][] = new int[4][31];
+        int houses[][] = new int[HOUSE_COUNT][31];
         int roundNumber = -1; // Start from -1 so that first round is 0 (even) for WHITE
         // Initialize player scores
         int playerWhiteScore = 0;
         int playerBlackScore = 0;
-        do{
-            roundNumber++; // Increment round number
-            int randomNumber = randomNumberGenerator(1, 15);
-            if(roundNumber % 2 == 0){ // WHITE's turn is on even rounds
-                System.out.println("WHITE Plays (" + playerWhiteScore + " points)");
-                displayMenu(houses, randomNumber); //Display game menu
-                playerWhiteScore = choiceStage(houses, randomNumber, playerWhiteScore); //Run choice stage for WHITE and update score
-            }else{
-                System.out.println("BLACK Plays (" + playerBlackScore + " points)");
-                displayMenu(houses, randomNumber); //Display game menu
-                playerBlackScore = choiceStage(houses, randomNumber, playerBlackScore); //Run choice stage for BLACK and update score
+        if (HOUSE_COUNT < 1){
+            System.out.println("The game requires at least 1 house to play. Please set HOUSE_COUNT to at least 1.");
+            return; // Exit the program if there are no houses
+        }else{
+            do{
+                roundNumber++; // Increment round number
+                int randomNumber = randomNumberGenerator(1, 15);
+                if(roundNumber % 2 == 0){ // WHITE's turn is on even rounds
+                    System.out.println("WHITE Plays (" + playerWhiteScore + " points)");
+                    displayMenu(houses, randomNumber); //Display game menu
+                    playerWhiteScore = choiceStage(houses, randomNumber, playerWhiteScore); //Run choice stage for WHITE and update score
+                }else{
+                    System.out.println("BLACK Plays (" + playerBlackScore + " points)");
+                    displayMenu(houses, randomNumber); //Display game menu
+                    playerBlackScore = choiceStage(houses, randomNumber, playerBlackScore); //Run choice stage for BLACK and update score
+                }
+            }while(!allHousesClosed(houses)); //Continue until all houses are closed
+            System.out.println("Game Over!");
+            if (playerWhiteScore > playerBlackScore){
+                System.out.println("WHITE wins with "+playerWhiteScore+" points!"); 
+            }else if (playerBlackScore > playerWhiteScore){
+                System.out.println("BLACK wins with "+playerBlackScore+" points!"); 
+            }else if(playerBlackScore == playerWhiteScore){
+                System.out.println("It's a tie! Both players have "+playerBlackScore+" points!");
             }
-        }while(!allHousesClosed(houses)); //Continue until all houses are closed
-        System.out.println("Game Over!");
-        if (playerWhiteScore > playerBlackScore){
-            System.out.println("WHITE wins with "+playerWhiteScore+" points!"); 
-        }else if (playerBlackScore > playerWhiteScore){
-            System.out.println("BLACK wins with "+playerBlackScore+" points!"); 
-        }else if(playerBlackScore == playerWhiteScore){
-            System.out.println("It's a tie! Both players have "+playerBlackScore+" points!");
         }
     }
 
@@ -133,8 +139,8 @@ public class FourHouses{
     //Method to handle the choice stage of the game
     public static int choiceStage(int houses[][], int randomNumber, int playerScore){
         int choice = scan.nextInt();
-        while(choice < 1 || choice > 4){
-            System.out.println("Your choice should be from 1 to 4. Please enter again:");
+        while(choice < 1 || choice > HOUSE_COUNT){
+            System.out.println("Your choice should be from 1 to " + HOUSE_COUNT + ". Please enter again:");
             choice = scan.nextInt();
         } // Validate choice input
         return processHouseChoice(houses[choice - 1], randomNumber, choice, playerScore, houses);
