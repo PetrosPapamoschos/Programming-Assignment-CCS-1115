@@ -75,6 +75,11 @@ public class FourHouses{
         return false;
     }
 
+    //Method to check if adding a number to a house would exceed 31
+    public static boolean houseGoesOver31(int house[], int numberToAdd){
+        return (sumOfHouse(house) + numberToAdd) > 31;
+    }
+
     //Method to reset a house
     public static void resetHouse(int house[]){
         Arrays.fill(house, 0);
@@ -151,18 +156,25 @@ public class FourHouses{
     }
 
     //Method to process the player's house choice
-    public static int processHouseChoice(int house[], int randomNumber, int choice, int playerScore, int house1[], int house2[], int house3[], int house4[]){
-        if(isHouseClosed(house)){
+    public static int processHouseChoice(int houseOfChoice[], int randomNumber, int choice, int playerScore, int house1[], int house2[], int house3[], int house4[]){
+        if(isHouseClosed(houseOfChoice)){
             System.out.println("House " + choice + " is closed. Please choose another house:");
             return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
+        }else if(canCloseHouse(houseOfChoice, randomNumber, house1, house2, house3, house4)){
+            System.out.println("Invalid move, other move(s) are availabe without closing a house.");
+            return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
         }
-        addtoHouse(house, randomNumber);
-        if (houseEquals31(house)){
+        addtoHouse(houseOfChoice, randomNumber);
+        if (houseEquals31(houseOfChoice)){
             playerScore += 50; // Award 50 points for hitting exactly 31
             System.out.println("You scored 50 points!");
-        }else if(isHouseClosed(house)){
+        }else if(isHouseClosed(houseOfChoice)){
             System.out.println("House " + choice + " closed.");
         }
         return playerScore; // return same score if no points were scored
+    }
+
+    public static boolean canCloseHouse(int houseOfChoice[], int randomNumber, int house1[], int house2[], int house3[], int house4[]){
+       
     }
 }
