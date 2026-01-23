@@ -149,7 +149,7 @@ public class FourHouses{
         }
 
         public static int choiceStage(int house1[],int  house2[],int house3[],int  house4[], int randomNumber, int choice, int playerScore){
-              Scanner scan = new Scanner(System.in);
+            Scanner scan = new Scanner(System.in);
             choice = scan.nextInt();
         while(choice < 1 || choice > 4){
             System.out.println("Your choice should be from 1 to 4. Please enter again:");
@@ -172,9 +172,7 @@ public class FourHouses{
                     System.out.println("House 1 closed.");
                 }
                 break;
-            }
-            
-            
+            }            
             case 2: 
             {
                 if(isHouseClosed(house2)){
