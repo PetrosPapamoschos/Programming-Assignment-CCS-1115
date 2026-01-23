@@ -161,7 +161,7 @@ public class FourHouses{
             System.out.println("House " + choice + " is closed. Please choose another house:");
             return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
         }else if(cannotCloseHouse(houseOfChoice, randomNumber, house1, house2, house3, house4)){
-            System.out.println("Invalid move, other move(s) are availabe without closing a house.");
+            System.out.println("Invalid move, other move(s) are availabe without closing a house. Choose another house.");
             return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
         }
         addtoHouse(houseOfChoice, randomNumber);
@@ -174,19 +174,22 @@ public class FourHouses{
         return playerScore; // return same score if no points were scored
     }
 
+    //Method to check if the chosen house cannot be closed due to other available houses
     public static boolean cannotCloseHouse(int houseOfChoice[], int randomNumber, int house1[], int house2[], int house3[], int house4[]){
-        if (houseGoesOver31(houseOfChoice, randomNumber)){
+        //Check if adding the random number to the chosen house would exceed 31 
+        //and if there are other houses that can accept the number without exceeding 31 which are not the chosen house
+        if(houseGoesOver31(houseOfChoice, randomNumber)){
             if(!houseGoesOver31(house1, randomNumber) && house1 != houseOfChoice){
                 return true;
             }
             if(!houseGoesOver31(house2, randomNumber) && house2 != houseOfChoice){
                 return true;
             }
-            if (!houseGoesOver31(house3, randomNumber) && house3 != houseOfChoice) {
-                return true;                
+            if(!houseGoesOver31(house3, randomNumber) && house3 != houseOfChoice){
+                return true;
             }
-            if (!houseGoesOver31(house4, randomNumber) && house4 != houseOfChoice) {
-                return true;                
+            if(!houseGoesOver31(house4, randomNumber) && house4 != houseOfChoice){
+                return true;
             }
         }
         return false;
