@@ -8,10 +8,7 @@ public class FourHouses{
 
     public static void main(String[] args) {
         // Initialize houses with size 31 to hold house numbers because the odds to exceed 31 are 1 in 19.175,105.923.288.408.666.849.136.352.539.062.5(so basically impossible)
-        int house1[] = new int[31];
-        int house2[] = new int[31]; 
-        int house3[] = new int[31]; 
-        int house4[] = new int[31];
+        int houses[][] = new int[4][31];
         int roundNumber = -1; // Start from -1 so that first round is 0 (even) for WHITE
         // Initialize player scores
         int playerWhiteScore = 0;
@@ -21,14 +18,14 @@ public class FourHouses{
             int randomNumber = randomNumberGenerator(1, 15);
             if(roundNumber % 2 == 0){ // WHITE's turn is on even rounds
                 System.out.println("WHITE Plays (" + playerWhiteScore + " points)");
-                displayMenu(house1, house2, house3, house4, randomNumber); //Display game menu
-                playerWhiteScore = choiceStage(house1, house2, house3, house4, randomNumber, playerWhiteScore); //Run choice stage for WHITE and update score
+                displayMenu(houses, randomNumber); //Display game menu
+                playerWhiteScore = choiceStage(houses, randomNumber, playerWhiteScore); //Run choice stage for WHITE and update score
             }else{
                 System.out.println("BLACK Plays (" + playerBlackScore + " points)");
-                displayMenu(house1, house2, house3, house4, randomNumber); //Display game menu
-                playerBlackScore = choiceStage(house1, house2, house3, house4, randomNumber, playerBlackScore); //Run choice stage for BLACK and update score
+                displayMenu(houses, randomNumber); //Display game menu
+                playerBlackScore = choiceStage(houses, randomNumber, playerBlackScore); //Run choice stage for BLACK and update score
             }
-        }while(!allHousesClosed(house1, house2, house3, house4)); //Continue until all houses are closed
+        }while(!allHousesClosed(houses)); //Continue until all houses are closed
         System.out.println("Game Over!");
         if (playerWhiteScore > playerBlackScore){
             System.out.println("WHITE wins with "+playerWhiteScore+" points!"); 
@@ -45,8 +42,13 @@ public class FourHouses{
     }
 
     //Method to check if all houses are closed
-    public static boolean allHousesClosed(int house1[], int house2[], int house3[], int house4[]){
-       return (isHouseClosed(house1) && isHouseClosed(house2) && isHouseClosed(house3) && isHouseClosed(house4));
+    public static boolean allHousesClosed(int houses[][]){
+        for(int i=0; i < houses.length; i++) {
+            if(!isHouseClosed(houses[i])){
+                return false;
+            }
+        }
+       return true;
     }
 
     //Method to check if a singular house is closed
@@ -104,12 +106,11 @@ public class FourHouses{
     }
 
     //Method to display the game menu
-    public static void displayMenu(int[] house1, int[] house2, int[] house3, int[] house4, int randomNumber){
+    public static void displayMenu(int houses[][], int randomNumber){
         System.out.println("Houses:");
-        displayHouse(house1, 1);
-        displayHouse(house2, 2);
-        displayHouse(house3, 3);
-        displayHouse(house4, 4);
+        for(int i=0; i < houses.length; i++) {
+            displayHouse(houses[i], i + 1);
+        }
         System.out.println("Random number drawn: "+randomNumber+ "\nTo which house do you want to add the number?");
     }
 
@@ -130,39 +131,23 @@ public class FourHouses{
     }
 
     //Method to handle the choice stage of the game
-    public static int choiceStage(int house1[],int  house2[],int house3[],int  house4[], int randomNumber, int playerScore){
+    public static int choiceStage(int houses[][], int randomNumber, int playerScore){
         int choice = scan.nextInt();
         while(choice < 1 || choice > 4){
             System.out.println("Your choice should be from 1 to 4. Please enter again:");
             choice = scan.nextInt();
         } // Validate choice input
-        return processHouseChoice(getHouseByChoice(choice, house1, house2, house3, house4), randomNumber, choice, playerScore, house1, house2, house3, house4);
-    }
-
-    //Method to get the house array based on player's choice
-    public static int[] getHouseByChoice(int choice, int house1[], int house2[], int house3[], int house4[]){
-        switch(choice){
-            case 1:
-                return house1;
-            case 2:
-                return house2;
-            case 3:
-                return house3;
-            case 4:
-                return house4;
-            default:
-                return null;
-        }
+        return processHouseChoice(houses[choice - 1], randomNumber, choice, playerScore, houses);
     }
 
     //Method to process the player's house choice
-    public static int processHouseChoice(int houseOfChoice[], int randomNumber, int choice, int playerScore, int house1[], int house2[], int house3[], int house4[]){
+    public static int processHouseChoice(int houseOfChoice[], int randomNumber, int choice, int playerScore, int houses[][]){
         if(isHouseClosed(houseOfChoice)){
             System.out.println("House " + choice + " is closed. Please choose another house:");
-            return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
-        }else if(cannotCloseHouse(houseOfChoice, randomNumber, house1, house2, house3, house4)){
+            return choiceStage(houses, randomNumber, playerScore);
+        }else if(cannotCloseHouse(houseOfChoice, randomNumber, houses)){
             System.out.println("Invalid move, other move(s) are availabe without closing a house. Choose another house.");
-            return choiceStage(house1, house2, house3, house4, randomNumber, playerScore);
+            return choiceStage(houses, randomNumber, playerScore);
         }
         addtoHouse(houseOfChoice, randomNumber);
         if (houseEquals31(houseOfChoice)){
@@ -175,21 +160,14 @@ public class FourHouses{
     }
 
     //Method to check if the chosen house cannot be closed due to other available houses
-    public static boolean cannotCloseHouse(int houseOfChoice[], int randomNumber, int house1[], int house2[], int house3[], int house4[]){
+    public static boolean cannotCloseHouse(int houseOfChoice[], int randomNumber, int houses[][]){
         //Check if adding the random number to the chosen house would exceed 31 
         //and if there are other houses that can accept the number without exceeding 31 which are not the chosen house
         if(houseGoesOver31(houseOfChoice, randomNumber)){
-            if(!houseGoesOver31(house1, randomNumber) && house1 != houseOfChoice){
-                return true;
-            }
-            if(!houseGoesOver31(house2, randomNumber) && house2 != houseOfChoice){
-                return true;
-            }
-            if(!houseGoesOver31(house3, randomNumber) && house3 != houseOfChoice){
-                return true;
-            }
-            if(!houseGoesOver31(house4, randomNumber) && house4 != houseOfChoice){
-                return true;
+            for(int i=0; i < houses.length; i++) {
+                if(houses[i] != houseOfChoice && !houseGoesOver31(houses[i], randomNumber)){
+                    return true;
+                }
             }
         }
         return false;

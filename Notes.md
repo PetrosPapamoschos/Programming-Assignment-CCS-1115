@@ -40,15 +40,15 @@ Program is run:
 
 # Notes for 2d array:
 
-1 create  one int houses[][] = new int[4][31];
+1 create  one int houses[][] = new int[4][31]; check
 
-2 diplay for both players should only send houses (not 1,2,3,4)
+2 diplay for both players should only send houses (not 1,2,3,4) check
 
-3 allHousesClosed should only send houses (not 1,2,3,4)
+3 allHousesClosed should only send houses (not 1,2,3,4) check
 
-4 all housesClosed should do a for to check for all arrays 
+4 all housesClosed should do a for to check for all arrays check
 
-5 displayMenu should do a for to call displayHouse(houses[i], i + 1)  and hous1,house2,h... should be replaced with the 2d array houses
+5 displayMenu should do a for to call displayHouse(houses[i], i + 1)  and hous1,house2,h... should be replaced with the 2d array houses check 
 
 6 in choiceStage when processHouseChoice is called swap getHouseByChoice() with houses[choice - 1]
 
