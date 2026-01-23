@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class FourHouses{
 
     private static final Scanner scan = new Scanner(System.in);
-    private static final int HOUSE_COUNT = 50; // Set the number of houses for the game
+    private static final int HOUSE_COUNT = 4; // Set the number of houses for the game
 
     public static void main(String[] args) {
         // Initialize houses with size 31 to hold house numbers because the odds to exceed 31 are 1 in 19.175,105.923.288.408.666.849.136.352.539.062.5(so basically impossible)
